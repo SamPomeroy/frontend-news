@@ -57,8 +57,10 @@ export class News extends Component {
 
     render() {
       return (
-        <div>{
-          !this.state.isLoaded ? (<Audio
+        <div>
+          {
+          !this.state.isLoaded ? 
+          (<Audio
             height="80"
             width="80"
             radius="9"
@@ -66,7 +68,8 @@ export class News extends Component {
             ariaLabel="loading"
             wrapperStyle
             wrapperClass
-          />) : (
+          />) : 
+          (
             <>
           <div id="mainApp">
               <input 
