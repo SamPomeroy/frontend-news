@@ -189,7 +189,7 @@ export class SignUp extends Component {
   render() {
     return (
       <div className='container'>
-        <div className="form-text">Sign Up</div>
+        <div className="form-text">Create an Account</div>
         <div className="form-div">
             <form onSubmit={this.handleOnSubmit} className="form">
                 <div className="form-group-inline">

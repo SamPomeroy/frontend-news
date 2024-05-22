@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './News.css'
-//why is this not importing correctly
-import ArticleList from './ArticleList'
-//leave it? 
+import NewsList from './NewsList'
 import {Audio} from 'react-loader-spinner'
 
 export class News extends Component {
@@ -18,6 +16,7 @@ export class News extends Component {
       this.setState({searchInput: e.target.value})
     }
     //check axios news api call
+    // `https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${page}&apiKey=
     handleOnSubmit =async()=>{
       try {
         let foundArticles = await axios.get(`https://newsapi.com/?apikey=${import.meta.env.VITE_NEWS_KEY}&s=${this.state.searchInput}`)
@@ -45,7 +44,7 @@ export class News extends Component {
             const newsArray = []
             //check axios news api call
             for(let article of starternewsList){
-                const newsInfo = await axios.get(`https://newsapi.com/?apikey=${import.meta.env.VITE_NEWS_KEY}&t=${article}`)
+                const newsInfo = await axios.get(`https://newsapi.org/v2/top-headlines/sources?apiKey=VITE_NEWS_KEY`)
                 console.log(newsInfo)
                 newsArray.push(newsInfo.data)
             }
@@ -83,7 +82,7 @@ export class News extends Component {
           <div id="newsListContainer">
               <h3>News App</h3>
               <div>
-                  <newsList newsList ={this.state.newsList}/>
+                  <NewsList newsList ={this.state.newsList}/>
               </div>
           </div>
           </>
