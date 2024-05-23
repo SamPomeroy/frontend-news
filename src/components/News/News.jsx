@@ -19,7 +19,7 @@ export class News extends Component {
     // `https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${page}&apiKey=
     handleOnSubmit =async()=>{
       try {
-        let foundArticles = await axios.get(`https://newsapi.com/?apikey=${import.meta.env.VITE_NEWS_KEY}&s=${this.state.searchInput}`)
+        let foundArticles = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${page}&apiKey=${import.meta.env.VITE_NEWS_KEY}`)
         this.setState({newsList: foundArticles.data.Search })
       } catch (error) {
         console.log(error)

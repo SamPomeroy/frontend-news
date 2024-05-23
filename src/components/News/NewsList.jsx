@@ -1,8 +1,11 @@
 import {Link} from 'react-router-dom'
 
-function ArticleList({articleList}) {
+function NewsList({newsList}) {
     return(
-    articleList.map((article)=>{
+    articleList.map((item)=>{
+        return(
+            console.log(item)
+        )
         // return(
         //     <div key={movie.imdbID}>
         //         <Link  to={{pathname: `/movie-detail/${movie.Title}`}} >
@@ -20,4 +23,4 @@ function ArticleList({articleList}) {
     })
 )
 }
-export default ArticleList
+export default NewsList
