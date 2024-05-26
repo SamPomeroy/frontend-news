@@ -6,7 +6,6 @@ import{BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import Profile from './components/Profile/Profile' 
 import News from './components/News/News'
-import NewsItem from './components/News/NewsItem'
 
 function MainRouter(props) {
     return (
@@ -25,9 +24,8 @@ function MainRouter(props) {
             <Profile user = {props.user}/>
             </PrivateRoute>}
             />
-            <Route exact path='/News' element={<News/>}/>
-            <Route path='/News-detail/:title' element={<PrivateRoute>
-              <NewsItem/>
+            <Route exact path='/news' element={<PrivateRoute>
+            <News user = {props.user}/>
             </PrivateRoute>}/>
         </Routes>
        </Router>

@@ -15,18 +15,20 @@ export class News extends Component {
     handleOnChange=(e)=>{
       this.setState({searchInput: e.target.value})
     }
-    //check axios news api call
-    // `https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${page}&apiKey=
+
     handleOnSubmit =async()=>{
       try {
-        let foundArticles = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${page}&apiKey=${import.meta.env.VITE_NEWS_KEY}`)
-        this.setState({newsList: foundArticles.data.Search })
+        let foundArticles = await axios.get(`https://newsapi.org/v2/everything?q=${this.state.searchInput}&apiKey=${import.meta.env.VITE_NEWS_KEY}&language=en`)
+        this.setState({newsList: foundArticles.data.articles, searchInput: "" })
+
+        console.log(foundArticles)
       } catch (error) {
         console.log(error)
       }
     }
 
     async componentDidMount(){
+      this.setState({isLoaded: true})
         try {
             //top 10 stories?
            const starterNewsList= [
@@ -43,7 +45,7 @@ export class News extends Component {
             ]
             const newsArray = []
             //check axios news api call
-            for(let article of starternewsList){
+            for(let article of starterNewsList){
                 const newsInfo = await axios.get(`https://newsapi.org/v2/top-headlines/sources?apiKey=VITE_NEWS_KEY`)
                 console.log(newsInfo)
                 newsArray.push(newsInfo.data)
@@ -82,7 +84,7 @@ export class News extends Component {
           <div id="newsListContainer">
               <h3>News App</h3>
               <div>
-                  <NewsList newsList ={this.state.newsList}/>
+                  <NewsList user={this.props.user} newsList ={this.state.newsList}/>
               </div>
           </div>
           </>
