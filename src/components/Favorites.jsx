@@ -6,7 +6,7 @@ export class Favorites extends Component {
     return (
       <div>{
             this?.props?.user?.favorites.map(article=>(
-                <NewsItem article={article} key={article.url}/>
+                <NewsItem deleteFavorite={this.props.deleteFavorite} deleteSaved={this.props.deleteSaved} addSaved={this.props.addSaved} addFavorites={this.props.addFavorites} user={this.props.user} article={article} />
             ))
 
         }</div>

@@ -55,10 +55,61 @@ async componentDidMount(){
 }
 //saved and favorites funtions
 addFavorites =async(article)=>{
-  const user={...this.state.user, favorites: [...this.state.user.favorites, article]}
-  this.setState({user})
+  try {
+    const newFav=await Axios.post(`/add-favorite/${this.state.user.id}`, article)
+    console.log(newFav)
+    const user={...this.state.user, favorites: [...this.state.user.favorites, article]}
+    this.setState({user})
+  } catch (error) {
+    console.log(error)
+  }
 }
-
+addSaved =async(article)=>{
+  try {
+    const newSaved=await Axios.post(`/add-saved/${this.state.user.id}`, article)
+    console.log(newSaved)
+    const user={...this.state.user, saved: [...this.state.user.saved, article]}
+    this.setState({user})
+  } catch (error) {
+    console.log(error)
+  }
+}
+deleteFavorite = async(url)=>{
+  try {
+    const article=this.state.user.favorites.find(e=>e.url===url)
+    const deleted = await Axios.put(`/delete-favorite/${this.state.user.id}/${article._id}`)
+    console.log(deleted)
+    const favorites=[...this.state.user.favorites]
+    const updateFavorites=favorites.map(i=> {
+      if(i.url !== url){
+        return i
+      }
+    })
+    const user={...this.state.user, favorites: [...updateFavorites]}
+    this.setState({user})
+  } catch (error) {
+    console.log(error)
+  }
+}
+deleteSaved = async(url)=>{
+  try {
+    const article=this.state.user.saved.find(e=>e.url===url)
+    const deleted = await Axios.put(`/delete-saved/${this.state.user.id}/${article._id}`)
+    console.log(deleted)
+    const saved=[...this.state.user.saved]
+    const updateSaved=saved.map(i=> 
+      {
+        if(i.url !== url){
+          return i
+        }
+      }
+    )
+    const user={...this.state.user, saved: updateSaved}
+    this.setState({user})
+  } catch (error) {
+    console.log(error)
+  }
+}
   render() {
     return (
       <>
@@ -68,6 +119,9 @@ addFavorites =async(article)=>{
       handleUserLogin = {this.handleUserLogin}
       handleUserLogout = {this.handleUserLogout}
       addFavorites={this.addFavorites}
+      addSaved={this.addSaved}
+      deleteFavorite={this.deleteFavorite}
+      deleteSaved={this.deleteSaved}
       />
       </>
     )

@@ -9,7 +9,7 @@ export class NewsItem extends Component {
   render() {
     return (
       <>
-        <Card onClick={()=>this.setState({showModal: true})} style={{width: '50vw'}}>
+        {this.props.article&&<Card onClick={()=>this.setState({showModal: true})} style={{width: '50vw'}}>
           <Card.Img variant="top" src={this.props.article.urlToImage}/>
           <Card.Body>
             <Card.Title>
@@ -25,11 +25,11 @@ export class NewsItem extends Component {
             </a>
           </Card.Body>
           <Card.Footer>
-              {this.props?.user?.saved.some(e=>e.url==this.props.article.url)?<Button variant='success'>Remove from Saved</Button>:<Button variant='success'>Add to Saved</Button>}
-              {this.props?.user?.favorites.some(e=>e.url==this.props.article.url)?<Button>Remove from Favorites</Button>:<Button onClick={()=>this.props.addFavorites(this.props.article)}>Add to Favorites</Button>}
+              {this.props.user.saved.some(e=>e.url==this.props.article.url)?<Button onClick={()=>{this.props.deleteSaved(this.props.article.url)}} variant='success'>Remove from Saved</Button>:<Button onClick={()=>{this.props.addSaved(this.props.article)}} variant='success'>Add to Saved</Button>}
+              {this.props.user.favorites.some(e=>e.url==this.props.article.url)?<Button onClick={()=>{this.props.deleteFavorite(this.props.article.url)}}>Remove from Favorites</Button>:<Button onClick={()=>this.props.addFavorites(this.props.article)}>Add to Favorites</Button>}
 
           </Card.Footer>
-        </Card>
+        </Card>}
         </>
     )
   }

@@ -83,7 +83,7 @@ export class News extends Component {
           <div id="newsListContainer">
               <h3>News App</h3>
               <div>
-                  <NewsList addFavorites={this.props.addFavorites} user={this.props.user} newsList ={this.state.newsList}/>
+                  <NewsList deleteFavorite={this.props.deleteFavorite} deleteSaved={this.props.deleteSaved}  addSaved={this.props.addSaved} addFavorites={this.props.addFavorites} user={this.props.user} newsList ={this.state.newsList}/>
               </div>
           </div>
           </>

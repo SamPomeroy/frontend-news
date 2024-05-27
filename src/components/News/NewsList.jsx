@@ -12,7 +12,7 @@ export class NewsList extends Component {
         {
             this.props.newsList.map(article=>{
                 return(
-                    <NewsItem addFavorites={this.props.addFavorites} user={this.props.user} key={article.title} article={article}/>
+                    <NewsItem deleteFavorite={this.props.deleteFavorite} deleteSaved={this.props.deleteSaved} addSaved={this.props.addSaved} addFavorites={this.props.addFavorites} user={this.props.user} key={article.title} article={article}/>
                 )
             })
         }

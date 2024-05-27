@@ -7,7 +7,7 @@ export default function Navbar(props) {
   return (
     <Navs expand='lg' className='p-2' bg="dark" variant="dark">
         <Container>
-        <Navs.Brand href="#home">
+        <Navs.Brand as={Link} to='/'>
           News App
         </Navs.Brand>
         <Navs.Toggle />
