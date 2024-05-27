@@ -1,4 +1,4 @@
-import checkIfUserIsAuth from '../utils/checkIfUserIsAuth'
+import checkIfUserIsAuth from './utils/checkIfUserIsAuth'
 import {Navigate} from 'react-router-dom'
 
 

@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Axios from '../utils/Axios'
+import Axios from './utils/Axios'
 
 export class Profile extends Component {
     state = {

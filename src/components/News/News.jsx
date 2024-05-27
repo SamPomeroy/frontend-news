@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './News.css'
 import NewsList from './NewsList'
 import {Audio} from 'react-loader-spinner'
 
@@ -84,7 +83,7 @@ export class News extends Component {
           <div id="newsListContainer">
               <h3>News App</h3>
               <div>
-                  <NewsList user={this.props.user} newsList ={this.state.newsList}/>
+                  <NewsList addFavorites={this.props.addFavorites} user={this.props.user} newsList ={this.state.newsList}/>
               </div>
           </div>
           </>

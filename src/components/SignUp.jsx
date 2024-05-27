@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './SignUp.css'
 import {isAlpha, isAlphanumeric, isEmail, isStrongPassword} from 'validator'
 import {toast} from 'react-toastify'
 import axios from 'axios'

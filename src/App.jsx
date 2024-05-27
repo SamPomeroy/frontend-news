@@ -13,8 +13,16 @@ export class App extends Component {
     user: null
   }
 
-  handleUserLogin=(user)=>{
-    this.setState({user})
+  handleUserLogin=async (userObj)=>{
+    try {
+      const allUserInfo=await Axios.get(`/get-user-info/${userObj.id}`)
+      console.log(allUserInfo)
+      const user={...userObj, favorites: allUserInfo.data.favorites, saved: allUserInfo.data.saved}
+      this.setState({user})
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   handleUserLogout=()=>{
@@ -46,6 +54,10 @@ async componentDidMount(){
   }
 }
 //saved and favorites funtions
+addFavorites =async(article)=>{
+  const user={...this.state.user, favorites: [...this.state.user.favorites, article]}
+  this.setState({user})
+}
 
   render() {
     return (
@@ -55,6 +67,7 @@ async componentDidMount(){
       user = {this.state.user}
       handleUserLogin = {this.handleUserLogin}
       handleUserLogout = {this.handleUserLogout}
+      addFavorites={this.addFavorites}
       />
       </>
     )

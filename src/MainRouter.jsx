@@ -1,32 +1,47 @@
 import Home from './components/Home'
-import Login from './components/Login/Login'
-import SignUp from './components/SignUp/SignUp'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import Login from './components/Login'
+import SignUp from './components/SignUp'
+import PrivateRoute from './components/PrivateRoute'
 import{BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
-import NavBar from './components/NavBar/NavBar'
-import Profile from './components/Profile/Profile' 
+import Profile from './components/Profile' 
 import News from './components/News/News'
+import Layout from './components/Layout'
+import Favorites from './components/Favorites'
+import Saved from './components/Saved'
 
 function MainRouter(props) {
+    console.log(props)
     return (
       <Router>
-        <NavBar
-          user ={props.user}
-          handleUserLogout = {props.handleUserLogout}
-          />
         <Routes>
-          <Route path='/' element={<Home/>} />
+          <Route path='/' element={<Layout user = {props.user}><Home/></Layout>} />
           
-          <Route exact path='/signup' element={<SignUp/>} />
-          <Route exact path='/login' element={props.user ? <Navigate to='/News'/> : <Login handleUserLogin={props.handleUserLogin}/>} />
+          <Route exact path='/signup' element={<Layout user = {props.user}><SignUp/></Layout>} />
+          <Route exact path='/login' element={props.user ? <Navigate to='/News'/> : <Layout user = {props.user}><Login handleUserLogin={props.handleUserLogin}/></Layout>} />
           <Route exact path='/profile' element={
           <PrivateRoute>
+            <Layout user = {props.user}>
             <Profile user = {props.user}/>
+            </Layout>
             </PrivateRoute>}
             />
             <Route exact path='/news' element={<PrivateRoute>
-            <News user = {props.user}/>
+            <Layout user = {props.user} logoutUser={props.handleUserLogout}>
+            <News user = {props.user} addFavorites={props.addFavorites}/>
+            </Layout>
             </PrivateRoute>}/>
+            <Route exact path='/favorites' element={<PrivateRoute>
+            <Layout user = {props.user} logoutUser={props.handleUserLogout}>
+            <Favorites user = {props.user}/>
+            </Layout>
+            </PrivateRoute>}/>
+            <Route exact path='/saved' element={<PrivateRoute>
+            <Layout user = {props.user} logoutUser={props.handleUserLogout}>
+            <Saved user = {props.user}/>
+            </Layout>
+            </PrivateRoute>}/>
+
+
         </Routes>
        </Router>
     )
