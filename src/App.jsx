@@ -80,7 +80,7 @@ deleteFavorite = async(url)=>{
     const deleted = await Axios.put(`/delete-favorite/${this.state.user.id}/${article._id}`)
     console.log(deleted)
     const favorites=[...this.state.user.favorites]
-    const updateFavorites=favorites.map(i=> {
+    const updateFavorites=favorites.filter(i=> {
       if(i.url !== url){
         return i
       }
@@ -97,7 +97,7 @@ deleteSaved = async(url)=>{
     const deleted = await Axios.put(`/delete-saved/${this.state.user.id}/${article._id}`)
     console.log(deleted)
     const saved=[...this.state.user.saved]
-    const updateSaved=saved.map(i=> 
+    const updateSaved=saved.filter(i=> 
       {
         if(i.url !== url){
           return i
