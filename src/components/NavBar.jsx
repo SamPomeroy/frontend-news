@@ -6,7 +6,7 @@ export default function Navbar(props) {
   console.log(props)
   return (
     <Navs expand='lg' className='p-2' bg="dark" variant="dark">
-        <Container>
+        <Container fluid>
         <Navs.Brand as={Link} to='/'>
           News App
         </Navs.Brand>

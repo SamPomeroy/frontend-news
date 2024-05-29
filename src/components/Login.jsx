@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {jwtDecode} from 'jwt-decode'
 import {toast} from 'react-toastify'
+import { Button, Container, Form } from 'react-bootstrap'
 
 
 export class Login extends Component {
@@ -31,40 +32,20 @@ export class Login extends Component {
     }
   render() {
     return (
-      <div className='container'>
-        <div className="form-text">Login</div>
-        <div className="form-div">
-            <form onSubmit={this.handleOnSubmit} className="form">
-                <div className="form-group-block">
-                    <div className="block-container">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" 
-                        id='email' 
-                        placeholder='Email' 
-                        name='email' 
-                        value={this.state.email}
-                        onChange={this.handleOnChange} 
-                        />
-                    </div>
-                </div>
-                <div className="form-group-block">
-                    <div className="block-container">
-                        <label htmlFor="password">Password</label>
-                        <input type="text"
-                        id='password'
-                        name='password'
-                        placeholder='password'
-                        value={this.state.password} 
-                        onChange={this.handleOnChange}
-                        />
-                    </div>
-                </div>
-                <div className="button-container">
-                    <button type='submit'>Submit</button>
-                </div>
-            </form>
-        </div>
-      </div>
+        <Container className='bg-black text-white'  fluid style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '92vh'}}>
+            <Form style={{width:'50vw'}} onSubmit={this.handleOnSubmit}>
+                <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control name='email' value={this.state.email} onChange={this.handleOnChange}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type='password' name='password' value={this.state.password} onChange={this.handleOnChange}></Form.Control>
+                </Form.Group>
+                <Button type='submit' className='mt-3'>Submit</Button>
+
+            </Form>
+        </Container>
     )
   }
 }

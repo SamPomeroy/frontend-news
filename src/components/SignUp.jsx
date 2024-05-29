@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {isAlpha, isAlphanumeric, isEmail, isStrongPassword} from 'validator'
 import {toast} from 'react-toastify'
 import axios from 'axios'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
 export class SignUp extends Component {
     state={
@@ -187,88 +188,61 @@ export class SignUp extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <div className="form-text">Create an Account</div>
-        <div className="form-div">
-            <form onSubmit={this.handleOnSubmit} className="form">
-                <div className="form-group-inline">
-                <div className="inline-container">
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" 
-                    id='firstName' 
-                    placeholder = 'First Name' 
-                    name='firstName'
-                    value={this.state.firstName} 
-                    onChange={this.handleOnChange} 
-                    />
-                    <div className="errorMessage">{this.state.firstNameError}</div>
-                </div>
-                <div className="inline-container">
-                    <label htmlFor="lastName">Last Name</label>
-                    <input type="text" 
-                    id='lastName' 
-                    placeholder = 'Last Name' 
-                    name='lastName'
-                    value={this.state.lastName} 
-                    onChange={this.handleOnChange}
-                     />
-                      <div className="errorMessage">{this.state.lastNameError}</div>
-                </div>
-                </div>
-                <div className="form-group-block">
-                    <div className="block-container">
-                        <label htmlFor="email">Email</label>
-                        <input type="text"
-                        id='email'
-                        value={this.state.email}
-                        name='email'
-                        placeholder='Email' 
-                        onChange={this.handleOnChange}
-                        />
-                        <div className="errorMessage">{this.state.emailError}</div>
-                    </div>
-                    <div className="block-container">
-                        <label htmlFor="username">username</label>
-                        <input type="text"
-                        id='username'
-                        value={this.state.username}
-                        name='username'
-                        placeholder='Username' 
-                        onChange={this.handleOnChange}
-                        />
-                         <div className="errorMessage">{this.state.usernameError}</div>
-                    </div>
-                    <div className="block-container">
-                        <label htmlFor="password">password</label>
-                        <input type="text"
-                        id='password'
-                        value={this.state.password}
-                        name='password'
-                        placeholder='Password' 
-                        onChange={this.handleOnChange}
-                        />
-                         <div className="errorMessage">{this.state.passwordError}</div>
-                    </div>
-                    <div className="block-container">
-                        <label htmlFor="confirmPassword">confirm password</label>
-                        <input type="text"
-                        id='confirmPassword'
-                        value={this.state.confirmPassword}
-                        name='confirmPassword'
-                        placeholder='Confirm Password' 
-                        onChange={this.handleOnChange}
-                        />
-                         <div className="errorMessage">{this.state.confirmPasswordError}</div>
-                    </div>
-                </div>
-                <div className="button-container">
-                    <button disabled={this.state.submitIsDisabled} type='submit'>Submit</button>
-                </div>
-            </form>
-        </div>
-      </div>
-    )
-  }
-} 
+        <div style={{width: '100vw', height: '92vh'}} className='bg-black text-white'>
+            <Container fluid style={{display: 'flex', justifyContent: 'center', alignItems:'center', height: '100%'}}>
+                <Form style={{width: '70vw'}} onSubmit={this.handleOnSubmit}>
+                    <Row>
+                        <Col>
+                        <Form.Group>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control name='firstName' value={this.state.firstName} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.firstNameError}</Form.Text>
+                        </Form.Group>
+                        </Col>
+                        <Col>
+                        <Form.Group>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control name='lastName' value={this.state.lastName} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.lastNameError}</Form.Text>
+                        </Form.Group>
+                        </Col>
+                    </Row>
+                    <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                            <Form.Control name='username' value={this.state.username} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.usernameError}</Form.Text>
 
+                    </Form.Group>
+                    <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                            <Form.Control type='email' name='email' value={this.state.email} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.emailError}</Form.Text>
+
+                    </Form.Group>
+                    <Row>
+                        <Col>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type='password' name='password' value={this.state.password} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.passwordError}</Form.Text>
+                        </Form.Group>
+                        </Col>
+                        <Col>
+                        <Form.Group>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type='password' name='confirmPassword' value={this.state.confirmPassword} onChange={this.handleOnChange}></Form.Control>
+                            <Form.Text className='text-white'>{this.state.confirmPasswordError}</Form.Text>
+                        </Form.Group>
+                        </Col>
+                    </Row>
+                    <Button className='mt-3' type='submit'>Submit</Button>
+
+
+                </Form>
+            </Container>
+
+        </div>
+    )
+} 
+}
 export default SignUp

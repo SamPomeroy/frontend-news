@@ -9,7 +9,7 @@ export class NewsItem extends Component {
   render() {
     return (
       <>
-        {this.props.article&&<Card onClick={()=>this.setState({showModal: true})} style={{width: '50vw'}}>
+        {this.props.article&&<Card className='mt-2' onClick={()=>this.setState({showModal: true})} style={{width: '50vw'}}>
           <Card.Img variant="top" src={this.props.article.urlToImage}/>
           <Card.Body>
             <Card.Title>

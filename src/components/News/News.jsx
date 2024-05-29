@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import NewsList from './NewsList'
 import {Audio} from 'react-loader-spinner'
+import { Button, Form, InputGroup } from 'react-bootstrap'
 
 export class News extends Component {
     state= {
@@ -15,7 +16,8 @@ export class News extends Component {
       this.setState({searchInput: e.target.value})
     }
 
-    handleOnSubmit =async()=>{
+    handleOnSubmit =async(e)=>{
+      e.preventDefault()
       try {
         let foundArticles = await axios.get(`https://newsapi.org/v2/everything?q=${this.state.searchInput}&apiKey=${import.meta.env.VITE_NEWS_KEY}&language=en`)
         this.setState({newsList: foundArticles.data.articles, searchInput: "" })
@@ -31,25 +33,18 @@ export class News extends Component {
         try {
             //top 10 stories?
            const starterNewsList= [
-                // "Forrest Gump",
-                // "Avengers",
-                // "Hacksaw Ridge",
-                // "Real Steel",
-                // "The Help",
-                // "Scream",
-                // "Misery",
-                // "Rio",
-                // "Dodgeball"
+               //load top 10 current
+              //  const topTen = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=`)
     
             ]
             const newsArray = []
             //check axios news api call
-            for(let article of starterNewsList){
-                const newsInfo = await axios.get(`https://newsapi.org/v2/top-headlines/sources?apiKey=VITE_NEWS_KEY`)
-                console.log(newsInfo)
-                newsArray.push(newsInfo.data)
-            }
-            this.setState({newsList: [...newsArray], isLoaded: true})
+            // for(let article of starterNewsList){
+            //     const newsInfo = await axios.get(`https://newsapi.org/v2/top-headlines/sources?apiKey=VITE_NEWS_KEY`)
+            //     console.log(newsInfo)
+            //     newsArray.push(newsInfo.data)
+            // }
+            // this.setState({newsList: [...newsArray], isLoaded: true})
         } catch (error) {
             console.log(error)
         }
@@ -57,7 +52,7 @@ export class News extends Component {
 
     render() {
       return (
-        <div>
+        <div style={{width: '100vw', height:'92vh', overflow: 'auto'}} className='bg-black text-white'>
           {
           !this.state.isLoaded ? 
           (<Audio
@@ -70,23 +65,24 @@ export class News extends Component {
             wrapperClass
           />) : 
           (
-            <>
-          <div id="mainApp">
-              <input 
-              onChange={this.handleOnChange}
-              type="text"
-              placeholder='Search for an article...'
-              name='article'
-              value = {this.state.searchInput}/>
-              <button onClick={this.handleOnSubmit}> Search</button>
+            <div>
+          <div id="mainApp" style={{display:'flex', justifyContent:'center'}}>
+            <Form style={{width: '40vw'}} className='pt-5' onSubmit={this.handleOnSubmit}>
+              <InputGroup>
+              
+                <Form.Control placeholder='Search for an article...' name='article' onChange={this.handleOnChange} value={this.state.searchInput} ></Form.Control>
+              
+              <Button type='submit'>Search</Button>
+              </InputGroup>
+            </Form>
           </div>
-          <div id="newsListContainer">
-              <h3>News App</h3>
-              <div>
+          <div id="newsListContainer" style={{textAlign: 'center'}}>
+              <h3>News</h3>
+              <div style={{display: 'flex', justifyContent: 'center'}}>
                   <NewsList deleteFavorite={this.props.deleteFavorite} deleteSaved={this.props.deleteSaved}  addSaved={this.props.addSaved} addFavorites={this.props.addFavorites} user={this.props.user} newsList ={this.state.newsList}/>
               </div>
           </div>
-          </>
+          </div>
       )
     }
     </div>
