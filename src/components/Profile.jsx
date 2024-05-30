@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import Axios from './utils/Axios'
 
 export class Profile extends Component {
     state = {
@@ -9,40 +8,31 @@ export class Profile extends Component {
         email: ""
     }
     
-    async componentDidUpdate(prevProps){
-        try {
-            if(!prevProps.user && this.props.user){
-                console.log(this.props.user)
-                const foundUser = await Axios.get(`/get-user-by-id/${this.props.user.id}`)
-                const {firstName, lastName, username, email}= foundUser.data.payload
-                this.setState({firstName, lastName, username, email})
 
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    // componentDidUpdate(prevProps){
-    //     if(prevProps === null){
-
-    //     }
-    // }
-
-
+// componentDidUpdate(prevProps, prevState){
+//   console.log(this.state)
+//   if(prevProps.user !== this.props.user){
+//     console.log(this.props)
+    
+//     this.setState({firstName: this.props.user.firstName, lastName: this.props.user.lastName, email: this.props.user.email, username: this.props.user.username})
+//   }
+// }
 
 
 
   render() {
     return (
-      <div>
-        <div className="update-container">
-            <h3>Profile</h3>
+      <div >
+        <div style={{width: '100vw', height:'92vh', overflow: 'auto', display: 'flex', justifyContent: 'center', padding: '20px'}} className='bg-dark text-white' >
+          <div>
+            <h3><u>Profile</u></h3>
             <div>
-                <p>First Name: {this.state.firstName}</p>
-                <p>Last Name: {this.state.lastName}</p>
-                <p>Username: {this.state.username}</p>
-                <p>Email: {this.state.email}</p>
+                <p className='text-white'>First Name: {this.props.user.firstName}</p>
+                <p>Last Name: {this.props.user.lastName}</p>
+                <p>Username: {this.props.user.username}</p>
+                <p>Email: {this.props.user.email}</p>
             </div>
+        </div>
         </div>
       </div>
     )

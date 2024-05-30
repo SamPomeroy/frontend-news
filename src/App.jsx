@@ -17,7 +17,7 @@ export class App extends Component {
     try {
       const allUserInfo=await Axios.get(`/get-user-info/${userObj.id}`)
       console.log(allUserInfo)
-      const user={...userObj, favorites: allUserInfo.data.favorites, saved: allUserInfo.data.saved}
+      const user={...userObj, favorites: allUserInfo.data.favorites, saved: allUserInfo.data.saved, firstName: allUserInfo.data.firstName, lastName: allUserInfo.data.lastName}
       this.setState({user})
     } catch (error) {
       console.log(error)
@@ -44,7 +44,9 @@ async componentDidMount(){
           email: currentUser.email,
           id: currentUser.id,
           saved: allUserInfo.data.saved,
-          favorites: allUserInfo.data.favorites
+          favorites: allUserInfo.data.favorites,
+          firstName: allUserInfo.data.firstName,
+          lastName: allUserInfo.data.lastName
         }
       })
     } catch (error) {

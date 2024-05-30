@@ -22,7 +22,7 @@ function MainRouter(props) {
           <Route exact path='/login' element={props.user ? <Navigate to='/'/> : <Layout user = {props.user}><Login handleUserLogin={props.handleUserLogin}/></Layout>} />
           <Route exact path='/profile' element={
           <PrivateRoute>
-            <Layout user = {props.user}>
+            <Layout user = {props.user} logoutUser={props.handleUserLogout}>
             <Profile user = {props.user}/>
             </Layout>
             </PrivateRoute>}
